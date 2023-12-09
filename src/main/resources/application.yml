@@ -1,0 +1,30 @@
+server:
+  port: 8822
+
+spring:
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: false
+  datasource:
+    url: jdbc:h2:mem:test
+    username: sa
+    password: password
+    driverClassName: org.h2.Driver
+  jpa:
+    generate-ddl: false
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+  data:
+    rest:
+      base-path: /api
+
+logging:
+  level:
+    root: WARN
+    com.example.com.example.kameleoon_trial_task: DEBUG
+    org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver: DEBUG

@@ -4,6 +4,7 @@ package com.example.kameleoon_trial_task.model;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.util.ProxyUtils;
 
 import java.time.Instant;
@@ -18,10 +19,14 @@ import java.time.Instant;
 public abstract class BaseEntity implements HasId {
 
     @Id
+    @GeneratedValue(generator = "custom-generator",
+            strategy = GenerationType.IDENTITY)
+    @GenericGenerator(name = "custom-generator",
+            strategy = "com.example.kameleoon_trial_task.model.id.generator.BaseIdentifierGenerator")
     private String id;
 
     @CreationTimestamp
-    @Column(updatable = false, nullable = false)
+    @Column(updatable = false)
     private Instant createdAt;
 
     @Version

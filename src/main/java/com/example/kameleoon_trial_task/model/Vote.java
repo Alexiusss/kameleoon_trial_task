@@ -15,5 +15,5 @@ public class Vote extends BaseEntity{
 
     private String quoteId;
 
-    private boolean isUpvote;
+    private int vote;
 }

@@ -1,5 +1,6 @@
 package com.example.kameleoon_trial_task.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -13,18 +14,20 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(callSuper = true)
+@ToString(callSuper = true, exclude = {"author", "votes"})
+@Builder
 public class Quote extends BaseEntity {
-
-    private String content;
 
     @UpdateTimestamp
     private Instant modifiedAt;
+
+    private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id")
     private User author;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "quoteId")
+    @JsonManagedReference
     private List<Vote> votes;
 }

@@ -1,7 +1,9 @@
 package com.example.kameleoon_trial_task.service;
 
+import com.example.kameleoon_trial_task.error.IllegalRequestDataException;
 import com.example.kameleoon_trial_task.error.NotFoundException;
 import com.example.kameleoon_trial_task.model.Quote;
+import com.example.kameleoon_trial_task.model.Vote;
 import com.example.kameleoon_trial_task.model.dto.QuoteDto;
 import com.example.kameleoon_trial_task.repository.QuoteRepository;
 import com.example.kameleoon_trial_task.repository.UserRepository;
@@ -71,5 +73,23 @@ public class QuoteService {
     @Transactional
     public void deleteById(String id) {
         quoteRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void vote(String quoteId, String authorId, int vote) {
+        Quote quote = quoteRepository.findById(quoteId)
+                .orElseThrow(() -> new NotFoundException("Entity with id=" + quoteId + " not found"));
+        List<Vote> votes = quote.getVotes();
+        if (isContainVote(votes, quoteId, authorId)) {
+            throw new IllegalRequestDataException("Duplicate vote");
+        }
+        votes.add(new Vote(authorId, quoteId, vote));
+        quote.setVotes(votes);
+    }
+
+
+    private boolean isContainVote(List<Vote> votes, String quoteId, String authorId) {
+        return votes.stream()
+                .anyMatch(vote -> vote.getQuoteId().equals(quoteId) && vote.getUserId().equals(authorId));
     }
 }

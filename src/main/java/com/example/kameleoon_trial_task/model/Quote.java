@@ -28,7 +28,7 @@ public class Quote extends BaseEntity {
     @JsonIgnore
     private User author;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "quoteId")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "quoteId", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Vote> votes;
 }

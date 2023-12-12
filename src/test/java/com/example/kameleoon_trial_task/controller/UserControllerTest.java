@@ -17,7 +17,7 @@ class UserControllerTest extends AbstractControllerTest{
     public void createUser() throws Exception {
         perform(MockMvcRequestBuilders.post(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(writeValue(new User("test user", "test@mail.com", "password"))))
+                .content(writeValue(new User("test_user", "test@mail.com", "password"))))
                 .andExpect(status().isCreated())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
     }

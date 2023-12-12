@@ -1,6 +1,5 @@
 package com.example.kameleoon_trial_task.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
@@ -28,6 +27,6 @@ public class User extends BaseEntity {
 
     @NotBlank
     @Size(min = 5, max = 128)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 }

@@ -38,7 +38,7 @@ public class QuoteController {
 
     @Operation(summary = "Get a list of quotes with the chosen direction and limit")
     @GetMapping
-    public ResponseEntity<List<QuoteDto>> getTopTen(@RequestParam String direction, @RequestParam int limit) {
+    public ResponseEntity<List<QuoteDto>> getTopOrWorseQuotes(@RequestParam String direction, @RequestParam int limit) {
         List<QuoteDto> quotes = quoteService.getQuotesSortedByScores(direction, limit);
         return ResponseEntity.ok(quotes);
     }

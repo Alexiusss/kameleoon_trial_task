@@ -3,6 +3,7 @@ package com.example.kameleoon_trial_task.controller;
 import com.example.kameleoon_trial_task.model.User;
 import com.example.kameleoon_trial_task.model.dto.UserDto;
 import com.example.kameleoon_trial_task.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,7 @@ public class UserController {
 
     public static final String REST_URL = "/api/v1/users";
 
+    @Operation(summary = "Create a new user")
     @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserDto> createUser(@Valid @RequestBody User user) {
         User savedUser = userService.save(user);

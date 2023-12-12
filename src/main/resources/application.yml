@@ -28,3 +28,10 @@ logging:
     root: WARN
     com.example.com.example.kameleoon_trial_task: DEBUG
     org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver: DEBUG
+
+application-version: 1.0.0
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui

@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+  trial_task:
+    image: alexius1905/kameleoon_trial_task:latest
+    container_name: trial_task
+    ports:
+      - "8822:8822"

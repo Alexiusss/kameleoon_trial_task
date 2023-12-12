@@ -3,6 +3,7 @@ package com.example.kameleoon_trial_task.controller;
 import com.example.kameleoon_trial_task.model.Quote;
 import com.example.kameleoon_trial_task.model.dto.QuoteDto;
 import com.example.kameleoon_trial_task.service.QuoteService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -39,14 +40,14 @@ public class QuoteController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Quote> create(@RequestBody Quote quoteDto, @RequestParam String authorId) {
+    public ResponseEntity<Quote> create(@Valid @RequestBody Quote quoteDto, @RequestParam String authorId) {
         Quote createdQuote = quoteService.create(quoteDto, authorId);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdQuote);
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody Quote quoteDto, @RequestParam String authorId) {
+    public void update(@Valid @RequestBody Quote quoteDto, @RequestParam String authorId) {
         quoteService.update(quoteDto, authorId);
     }
 

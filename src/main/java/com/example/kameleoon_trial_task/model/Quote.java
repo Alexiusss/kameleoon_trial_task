@@ -2,6 +2,8 @@ package com.example.kameleoon_trial_task.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -21,6 +23,8 @@ public class Quote extends BaseEntity {
     @UpdateTimestamp
     private Instant modifiedAt;
 
+    @NotBlank
+    @Size(min = 10, max = 256)
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -3,6 +3,7 @@ package com.example.kameleoon_trial_task.controller;
 import com.example.kameleoon_trial_task.model.User;
 import com.example.kameleoon_trial_task.model.dto.UserDto;
 import com.example.kameleoon_trial_task.service.UserService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,7 +23,7 @@ public class UserController {
     public static final String REST_URL = "/api/v1/users";
 
     @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UserDto> createUser(@RequestBody User user) {
+    public ResponseEntity<UserDto> createUser(@Valid @RequestBody User user) {
         User savedUser = userService.save(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(new UserDto(savedUser));
     }
